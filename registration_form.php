@@ -48,30 +48,42 @@ function createRegistrationPage() {
 			$lastYear = Visitors::lastPreviousYearEmailUsed($data['fldEmail']);
 
 			$oVisitor = new Visitor($visitorId, $lastYear);
-			$data['fldFirstname'] = $oVisitor->getFirstname();
-			$data['fldLastname'] = $oVisitor->getLastname();
-			$data['fldResearchSubject'] = $oVisitor->getSubject();
-			$data['fldNewsletterChecked'] = $oVisitor->getNewsletter();
-			if ( $data['fldNewsletterChecked'] == 'on' || $data['fldNewsletterChecked'] == '1' ) {
-				$data['fldNewsletterChecked'] = 'CHECKED';
-			}
+//			$data['fldFirstname'] = $oVisitor->getFirstname();
+			$data['fldFirstname'] = '';
+//			$data['fldLastname'] = $oVisitor->getLastname();
+			$data['fldLastname'] = '';
+//			$data['fldResearchSubject'] = $oVisitor->getSubject();
+			$data['fldResearchSubject'] = '';
+//			$data['fldNewsletterChecked'] = $oVisitor->getNewsletter();
+			$data['fldNewsletterChecked'] = '';
+//			if ( $data['fldNewsletterChecked'] == 'on' || $data['fldNewsletterChecked'] == '1' ) {
+//				$data['fldNewsletterChecked'] = 'CHECKED';
+//			}
+			$data['fldNewsletterChecked'] = '';
 
 			// World address
-			$data['fldAddress'] = $oVisitor->getHomelandAddress()->getAddress();
-			$data['fldCity'] = $oVisitor->getHomelandAddress()->getCity();
-			$data['fldCountryId'] = $oVisitor->getHomelandAddress()->getCountryId();
+//			$data['fldAddress'] = $oVisitor->getHomelandAddress()->getAddress();
+			$data['fldAddress'] = '';
+//			$data['fldCity'] = $oVisitor->getHomelandAddress()->getCity();
+			$data['fldCity'] = '';
+//			$data['fldCountryId'] = $oVisitor->getHomelandAddress()->getCountryId();
+			$data['fldCountryId'] = '';
 
 			// Dutch (Netherlands) address
-			if ( $oVisitor->getTemporaryAddress()->isFound() ) {
-				$data['fldAddressTmp'] = $oVisitor->getTemporaryAddress()->getAddress();
-				$data['fldCityTmp'] = $oVisitor->getTemporaryAddress()->getCity();
-				$data['fldCountryTmp'] = 'CHECKED';
-			} else {
-				$data['fldCountryTmp'] = '';
-			}
+//			if ( $oVisitor->getTemporaryAddress()->isFound() ) {
+//				$data['fldAddressTmp'] = $oVisitor->getTemporaryAddress()->getAddress();
+//				$data['fldCityTmp'] = $oVisitor->getTemporaryAddress()->getCity();
+//				$data['fldCountryTmp'] = 'CHECKED';
+//			} else {
+//				$data['fldCountryTmp'] = '';
+//			}
+			$data['fldAddressTmp'] = '';
+			$data['fldCityTmp'] = '';
+			$data['fldCountryTmp'] = '';
 
 			// checkboxes research goals
-			$fldResearchGoals = $oVisitor->getVisitorsResearchGoals();
+//			$fldResearchGoals = $oVisitor->getVisitorsResearchGoals();
+			$fldResearchGoals = array();
 		} else {
 			//
 			$whatToDo = Misc::changeWhatToDoIfSubmitType($submitType, 'data_check');
