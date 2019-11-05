@@ -52,6 +52,7 @@ function createContent() {
 	$oForm->add_field( new class_field_hidden ( array(
 		'fieldname' => 'id'
 		, 'fieldlabel' => '#'
+		, 'save_field_programmatically_in_db' => true
 		)));
 
 	// required !!!

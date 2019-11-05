@@ -6,6 +6,7 @@ class class_field {
 	private $m_onNew;
 	private $m_addquotes;
 	private $m_addpostfield;
+	public $m_save_field_programmatically_in_db = false;
 
 	function class_field($fieldsettings) {
 		$this->m_fieldname = '';
@@ -17,6 +18,7 @@ class class_field {
 		$this->m_class = '';
 		$this->m_readonly = 0;
 		$this->m_addpostfield = '';
+		$this->m_save_field_programmatically_in_db = false;
 
 		if ( is_array( $fieldsettings ) ) {
 			foreach ( $fieldsettings as $field => $value ) {
@@ -47,6 +49,9 @@ class class_field {
 						break;
 					case "addpostfield":
 						$this->m_addpostfield = $fieldsettings["addpostfield"];
+						break;
+					case "save_field_programmatically_in_db":
+						$this->m_save_field_programmatically_in_db = $fieldsettings["save_field_programmatically_in_db"];
 						break;
 				}
 			}
@@ -120,11 +125,17 @@ class class_field {
 	}
 
 	function push_field_into_query_array($query_fields) {
-		$value = addslashes($this->get_form_value());
 
-		$value = "'" . $value . "'";
+		// check if we are going to save the field programmatically using another script
+		if ( $this->m_save_field_programmatically_in_db == false ) {
 
-		array_push($query_fields, array($this->get_fieldname() => $value));
+//			$value = addslashes($_POST["FORM_" . $this->get_fieldname()]);
+			$value = addslashes($this->get_form_value());
+			if ( $this->m_addquotes == 1 ) {
+				$value = "'" . $value . "'";
+			}
+			array_push($query_fields, array($this->get_fieldname() => $value));
+		}
 
 		return $query_fields;
 	}
